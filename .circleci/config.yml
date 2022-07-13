@@ -15,10 +15,13 @@ jobs:
           echo "world"
   print_env:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/base:2020.0.1
     steps:
+      - checkout
       - run:
-          echo $ENV_VAR_ONE
+          name: "echo one the env var part of the project"
+          command: |
+            echo $ENV_VAR_ONE
 
 workflows:
   welcome:
