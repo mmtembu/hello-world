@@ -13,10 +13,18 @@ jobs:
     steps:
       - run:
           echo "world"
+  print_env:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          echo ENV_VAR_ONE
 
 workflows:
   welcome:
     jobs:
-    - print_hello
+    - print_env
+    - print_hello: 
+        requires: [print_env]
     - print_world:
         requires: [print_hello]
