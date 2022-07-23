@@ -9,12 +9,12 @@ commands:
      steps:
        - run: 
           command: |
-            echo << parameters.to >> == "-1" ? "No parameter passed" : << parameters.to >>
+            echo << parameters.to >> === "-1" ? "No parameter passed" : << parameters.to >>
 
 jobs:
-  print_id_for_pipeline:
+  print_id:
     docker:
-      - image: cirleci/node:13.8.0
+      - image: cirleci/node:9.6.1
     steps:
       - print_pipeline_id:
           to: $CIRCLE_WORKFLOW_ID
@@ -51,7 +51,7 @@ jobs:
 workflows:
   welcome:
     jobs:
-      - print_id_for_pipeline
+      - print_id
     # - save_hello_world_output
     # - print_output_file: 
     #     requires: [save_hello_world_output]
