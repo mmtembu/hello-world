@@ -8,6 +8,10 @@ jobs:
       - run:
           name: Creating workspace
           command: |
+            mkdir /tmp/workspace
+            cd /tmp/workspace
+            pwd
+            ls
             echo "hello world" > output.txt
       - persist_to_workspace:
           root: /tmp/workspace
