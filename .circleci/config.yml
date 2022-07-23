@@ -11,15 +11,15 @@ jobs:
             mkdir /tmp/workspace
             echo "hello world" > output.txt
       - persist_to_workspace:
-          root: /tmp
+          root: /tmp/workspace
           paths:
-            -  workspace
+            -  files/output.txt
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /tmp
+          at: /tmp/files
       - run:
           name: Displaying contents of saved output.txt
           command: |
