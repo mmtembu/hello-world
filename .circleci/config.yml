@@ -1,6 +1,26 @@
 version: 2.1
 
 jobs:
+  save_hello_world_output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          echo "hello world" > output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - target/
+            - build/*
+  print_output_file:
+    docker:
+      - image: circle/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          cat output.txt
+
   print_hello:
     docker:
       - image: circleci/node:13.8.0
@@ -13,21 +33,10 @@ jobs:
     steps:
       - run:
           echo "world"
-  print_env:
-    docker:
-      - image: cimg/base:2020.0.1
-    steps:
-      - checkout
-      - run:
-          name: "echo one the env var part of the project"
-          command: |
-            echo $ENV_VAR_ONE
 
 workflows:
   welcome:
     jobs:
-    - print_env
+    - save_hello_world_output
     - print_hello: 
-        requires: [print_env]
-    - print_world:
-        requires: [print_hello]
+        requires: [save_hello_world_output]
