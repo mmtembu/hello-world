@@ -8,12 +8,11 @@ jobs:
       - run:
           name: Creating workspace
           command: |
-            mkdir /tmp/workspace
             echo "hello world" > output.txt
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            -  files
+            -  output.txt
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
