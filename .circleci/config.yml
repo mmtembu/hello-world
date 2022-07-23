@@ -19,9 +19,11 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp
       - run:
-          cat output.txt
+          name: Displaying contents of saved output.txt
+          command: |
+            cat output.txt
 
 workflows:
   welcome:
