@@ -14,7 +14,7 @@ commands:
 jobs:
   print_id:
     docker:
-      - image: cirleci/node:9.6.1
+      - image: circleci/node:18.8.0
     steps:
       - print_pipeline_id:
           to: $CIRCLE_WORKFLOW_ID
