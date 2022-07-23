@@ -9,7 +9,7 @@ commands:
      steps:
        - run: 
           command: |
-            echo << parameters.to >> === "-1" ? "No parameter passed" : << parameters.to >>
+            echo << parameters.to >>
 
 jobs:
   print_id_for_pipeline:
@@ -33,7 +33,13 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            -  output.txt
+            # -  output.txt
+            -  workspace
+      - run:
+          name: "Error occurred"
+          command: |
+            echo "An error occurred while trying to persist_to_workspace"
+          when: on_fail
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
@@ -51,7 +57,7 @@ jobs:
 workflows:
   welcome:
     jobs:
-      - print_id_for_pipeline
-    # - save_hello_world_output
-    # - print_output_file: 
-    #     requires: [save_hello_world_output]
+      # - print_id_for_pipeline
+    - save_hello_world_output
+    - print_output_file: 
+        requires: [save_hello_world_output]
