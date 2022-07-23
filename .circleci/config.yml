@@ -28,7 +28,6 @@ jobs:
           command: |
             pwd
             ls -lah
-            cd workspace && ls -lah
             cat output.txt
 
 workflows:
