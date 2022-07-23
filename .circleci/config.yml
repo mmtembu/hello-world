@@ -23,6 +23,7 @@ jobs:
       - run:
           name: Displaying contents of saved output.txt
           command: |
+            pwd
             ls -lah
             cd workspace && ls -lah
             cat output.txt
