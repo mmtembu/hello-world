@@ -26,6 +26,7 @@ jobs:
       - run:
           name: Displaying contents of saved output.txt
           command: |
+            cd /tmp/workspace
             pwd
             ls -lah
             cat output.txt
