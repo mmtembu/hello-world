@@ -13,13 +13,13 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            -  files/output.txt
+            -  files
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /tmp/files
+          at: /tmp/workspace
       - run:
           name: Displaying contents of saved output.txt
           command: |
